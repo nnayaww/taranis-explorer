@@ -11,6 +11,7 @@ import Insights from "./pages/Insights";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
+// Create a new query client
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -22,8 +23,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions/:solutionId" element={<NotFound />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/:productId" element={<NotFound />} />
           <Route path="/insights" element={<Insights />} />
+          <Route path="/insights/:articleId" element={<NotFound />} />
           <Route path="/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
