@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const solutions = [
   {
@@ -51,10 +52,12 @@ const Solutions = () => {
                 <h3 className="text-xl font-semibold text-gray-900">{solution.title}</h3>
                 <p className="mt-2 text-gray-600">{solution.description}</p>
                 <div className="mt-4">
-                  <Button variant="link" className="text-green-600 p-0 flex items-center">
-                    Learn more
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <Link to={solution.link}>
+                    <Button variant="link" className="text-green-600 p-0 flex items-center">
+                      Learn more
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

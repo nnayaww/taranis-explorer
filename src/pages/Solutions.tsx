@@ -1,7 +1,7 @@
 
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Plant, Bug, BarChart3, Building2 } from "lucide-react";
+import { ArrowRight, Sprout, Bug, BarChart3, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const SolutionCard = ({ title, description, icon: Icon, link }: { 
@@ -42,7 +42,7 @@ const Solutions = () => {
             <SolutionCard
               title="Crop Monitoring"
               description="Real-time monitoring of crop health, growth, and development throughout the entire growing season."
-              icon={Plant}
+              icon={Sprout}
               link="/solutions/crop-monitoring"
             />
             <SolutionCard
@@ -66,13 +66,13 @@ const Solutions = () => {
             <SolutionCard
               title="For Farmers"
               description="Intuitive tools designed specifically for individual farmers and small operations."
-              icon={Plant}
+              icon={Sprout}
               link="/solutions/farmers"
             />
             <SolutionCard
               title="For Agronomists"
               description="Advanced tools for agricultural consultants to monitor multiple fields and provide data-driven recommendations."
-              icon={Plant}
+              icon={Sprout}
               link="/solutions/agronomists"
             />
           </div>
