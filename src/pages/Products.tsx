@@ -1,0 +1,144 @@
+
+import Layout from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { Check, Camera, Cpu, Cloud, Database, Globe } from "lucide-react";
+
+const ProductCard = ({ title, description, features, image }: {
+  title: string;
+  description: string;
+  features: string[];
+  image: string;
+}) => (
+  <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 border border-gray-100">
+    <div className="md:flex">
+      <div className="md:w-2/5">
+        <img 
+          src={image} 
+          alt={title} 
+          className="h-64 w-full object-cover md:h-full"
+        />
+      </div>
+      <div className="p-8 md:w-3/5">
+        <h3 className="text-2xl font-bold text-gray-900 mb-3">{title}</h3>
+        <p className="text-gray-600 mb-6">{description}</p>
+        <div className="mb-6">
+          <h4 className="text-sm uppercase text-gray-500 font-semibold mb-3">Key Features</h4>
+          <ul className="space-y-2">
+            {features.map((feature, index) => (
+              <li key={index} className="flex items-start">
+                <Check className="text-green-500 h-5 w-5 mr-2 mt-0.5" />
+                <span className="text-gray-700">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Button className="bg-green-600 hover:bg-green-700">
+          Learn More
+        </Button>
+      </div>
+    </div>
+  </div>
+);
+
+const Products = () => {
+  const products = [
+    {
+      title: "Taranis AerialImaging",
+      description: "High-resolution aerial imagery capture and processing for comprehensive field monitoring.",
+      features: [
+        "Ultra-high-resolution imagery (0.5mm per pixel)",
+        "Proprietary image capture technology",
+        "Compatible with drones and manned aircraft",
+        "Rapid processing and delivery"
+      ],
+      image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      title: "Taranis FieldAI",
+      description: "Advanced AI-powered analysis of field imagery to detect issues before they become visible to the human eye.",
+      features: [
+        "Early disease detection",
+        "Weed identification and mapping",
+        "Nutrient deficiency analysis",
+        "Plant count and stand evaluation"
+      ],
+      image: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+    },
+    {
+      title: "Taranis FieldInsight",
+      description: "Comprehensive dashboard for monitoring and managing all aspects of field health and operations.",
+      features: [
+        "Customizable user interface",
+        "Real-time alerts and notifications",
+        "Historical data tracking and comparison",
+        "Multi-field management tools",
+        "Weather integration"
+      ],
+      image: "https://images.unsplash.com/photo-1586892477838-2b96e85e0f96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+    }
+  ];
+
+  return (
+    <Layout>
+      <div className="pt-12 pb-24 bg-gradient-to-b from-green-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+              Our Products
+            </h1>
+            <p className="mt-5 text-xl text-gray-500">
+              Cutting-edge agricultural intelligence tools designed to revolutionize farming
+            </p>
+          </div>
+
+          <div className="mt-12">
+            {products.map((product, index) => (
+              <ProductCard
+                key={index}
+                title={product.title}
+                description={product.description}
+                features={product.features}
+                image={product.image}
+              />
+            ))}
+          </div>
+
+          <div className="bg-green-50 rounded-xl p-8 mt-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-gray-900">Our Technology Stack</h2>
+              <p className="text-gray-600 mt-2">Powered by cutting-edge technologies</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <div className="flex flex-col items-center">
+                <div className="bg-white p-4 rounded-full shadow mb-3">
+                  <Camera className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="font-medium">Advanced Imaging</h3>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="bg-white p-4 rounded-full shadow mb-3">
+                  <Cpu className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="font-medium">AI Processing</h3>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="bg-white p-4 rounded-full shadow mb-3">
+                  <Cloud className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="font-medium">Cloud Platform</h3>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="bg-white p-4 rounded-full shadow mb-3">
+                  <Database className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="font-medium">Big Data Analysis</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default Products;
