@@ -2,12 +2,16 @@
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Check, Camera, Cpu, Cloud, Database, Globe } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({ title, description, features, image }: {
+const ProductCard = ({ title, description, features, image, slug }: {
   title: string;
   description: string;
   features: string[];
   image: string;
+  slug: string;
 }) => (
   <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 border border-gray-100">
     <div className="md:flex">
@@ -32,51 +36,28 @@ const ProductCard = ({ title, description, features, image }: {
             ))}
           </ul>
         </div>
-        <Button className="bg-green-600 hover:bg-green-700">
-          Learn More
-        </Button>
+        <Link to={`/products/${slug}`}>
+          <Button className="bg-green-600 hover:bg-green-700">
+            Learn More
+          </Button>
+        </Link>
       </div>
     </div>
   </div>
 );
 
 const Products = () => {
-  const products = [
-    {
-      title: "Taranis AerialImaging",
-      description: "High-resolution aerial imagery capture and processing for comprehensive field monitoring.",
-      features: [
-        "Ultra-high-resolution imagery (0.5mm per pixel)",
-        "Proprietary image capture technology",
-        "Compatible with drones and manned aircraft",
-        "Rapid processing and delivery"
-      ],
-      image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+  const { data: products, isLoading, error } = useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*');
+      
+      if (error) throw error;
+      return data;
     },
-    {
-      title: "Taranis FieldAI",
-      description: "Advanced AI-powered analysis of field imagery to detect issues before they become visible to the human eye.",
-      features: [
-        "Early disease detection",
-        "Weed identification and mapping",
-        "Nutrient deficiency analysis",
-        "Plant count and stand evaluation"
-      ],
-      image: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
-    },
-    {
-      title: "Taranis FieldInsight",
-      description: "Comprehensive dashboard for monitoring and managing all aspects of field health and operations.",
-      features: [
-        "Customizable user interface",
-        "Real-time alerts and notifications",
-        "Historical data tracking and comparison",
-        "Multi-field management tools",
-        "Weather integration"
-      ],
-      image: "https://images.unsplash.com/photo-1586892477838-2b96e85e0f96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
-    }
-  ];
+  });
 
   return (
     <Layout>
@@ -92,15 +73,26 @@ const Products = () => {
           </div>
 
           <div className="mt-12">
-            {products.map((product, index) => (
-              <ProductCard
-                key={index}
-                title={product.title}
-                description={product.description}
-                features={product.features}
-                image={product.image}
-              />
-            ))}
+            {isLoading ? (
+              <div className="text-center py-12">
+                <p className="text-lg text-gray-600">Loading products...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <p className="text-lg text-red-600">Error loading products. Please try again later.</p>
+              </div>
+            ) : (
+              products?.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  title={product.title}
+                  description={product.description}
+                  features={product.features.slice(0, 4)} // Limit to 4 features for display
+                  image={product.image_url}
+                  slug={product.slug}
+                />
+              ))
+            )}
           </div>
 
           <div className="bg-green-50 rounded-xl p-8 mt-8">

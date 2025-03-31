@@ -1,8 +1,11 @@
 
+import { useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sprout, Bug, BarChart3, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const SolutionCard = ({ title, description, icon: Icon, link }: { 
   title: string;
@@ -24,7 +27,33 @@ const SolutionCard = ({ title, description, icon: Icon, link }: {
   </div>
 );
 
+const getIconForSolution = (title: string) => {
+  if (title.includes("Disease") || title.includes("Pest")) return Bug;
+  if (title.includes("Yield") || title.includes("Analytics")) return BarChart3;
+  if (title.includes("Enterprise") || title.includes("Agronomists")) return Building2;
+  return Sprout;
+};
+
 const Solutions = () => {
+  const { data: solutions, isLoading, error } = useQuery({
+    queryKey: ['solutions'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('solutions')
+        .select('*');
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  // Log any errors to console for debugging
+  useEffect(() => {
+    if (error) {
+      console.error("Error fetching solutions:", error);
+    }
+  }, [error]);
+
   return (
     <Layout>
       <div className="pt-12 pb-24 bg-gradient-to-b from-green-50 to-white">
@@ -38,44 +67,27 @@ const Solutions = () => {
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <SolutionCard
-              title="Crop Monitoring"
-              description="Real-time monitoring of crop health, growth, and development throughout the entire growing season."
-              icon={Sprout}
-              link="/solutions/crop-monitoring"
-            />
-            <SolutionCard
-              title="Disease & Pest Detection"
-              description="Early identification of diseases, pests, and weeds using advanced AI and image recognition."
-              icon={Bug}
-              link="/solutions/disease-detection"
-            />
-            <SolutionCard
-              title="Yield Prediction"
-              description="Accurate forecasting of crop yields based on historical data, current conditions, and AI models."
-              icon={BarChart3}
-              link="/solutions/yield-prediction"
-            />
-            <SolutionCard
-              title="Enterprise Management"
-              description="Comprehensive management tools for agricultural businesses operating at scale."
-              icon={Building2}
-              link="/solutions/enterprise"
-            />
-            <SolutionCard
-              title="For Farmers"
-              description="Intuitive tools designed specifically for individual farmers and small operations."
-              icon={Sprout}
-              link="/solutions/farmers"
-            />
-            <SolutionCard
-              title="For Agronomists"
-              description="Advanced tools for agricultural consultants to monitor multiple fields and provide data-driven recommendations."
-              icon={Sprout}
-              link="/solutions/agronomists"
-            />
-          </div>
+          {isLoading ? (
+            <div className="text-center py-12">
+              <p className="text-lg text-gray-600">Loading solutions...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <p className="text-lg text-red-600">Error loading solutions. Please try again later.</p>
+            </div>
+          ) : (
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {solutions?.map((solution) => (
+                <SolutionCard
+                  key={solution.id}
+                  title={solution.title}
+                  description={solution.description}
+                  icon={getIconForSolution(solution.title)}
+                  link={`/solutions/${solution.slug}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </Layout>

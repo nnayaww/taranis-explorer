@@ -9,7 +9,126 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      articles: {
+        Row: {
+          author: string
+          content: string
+          created_at: string
+          description: string
+          id: string
+          image_url: string
+          published_at: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author: string
+          content: string
+          created_at?: string
+          description: string
+          id?: string
+          image_url: string
+          published_at?: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          content?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          published_at?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          created_at: string
+          description: string
+          features: string[]
+          id: string
+          image_url: string
+          long_description: string
+          slug: string
+          specifications: string[]
+          testimonial_author: string
+          testimonial_quote: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          features: string[]
+          id?: string
+          image_url: string
+          long_description: string
+          slug: string
+          specifications: string[]
+          testimonial_author: string
+          testimonial_quote: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          features?: string[]
+          id?: string
+          image_url?: string
+          long_description?: string
+          slug?: string
+          specifications?: string[]
+          testimonial_author?: string
+          testimonial_quote?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      solutions: {
+        Row: {
+          benefits: string[]
+          created_at: string
+          description: string
+          features: string[]
+          id: string
+          image_url: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          benefits: string[]
+          created_at?: string
+          description: string
+          features: string[]
+          id?: string
+          image_url: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          benefits?: string[]
+          created_at?: string
+          description?: string
+          features?: string[]
+          id?: string
+          image_url?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
