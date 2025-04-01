@@ -41,7 +41,19 @@ serve(async (req) => {
       }),
     });
 
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('OpenAI API error:', errorData);
+      throw new Error(`OpenAI API returned ${response.status}: ${JSON.stringify(errorData)}`);
+    }
+
     const data = await response.json();
+    
+    // Check if data and choices exist before accessing
+    if (!data || !data.choices || !data.choices[0] || !data.choices[0].message) {
+      throw new Error("Invalid response structure from OpenAI API");
+    }
+    
     const aiResponse = data.choices[0].message.content;
 
     return new Response(JSON.stringify({ 

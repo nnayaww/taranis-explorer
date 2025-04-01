@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { MessageCircle, Send, X, Minimize2, Maximize2 } from "lucide-react";
+import { MessageCircle, Send, X, Minimize2, Maximize2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
@@ -43,18 +43,36 @@ const AIChat = () => {
         body: { message: userMessage.content }
       });
 
-      if (error) throw new Error(error.message);
+      if (error) {
+        console.error("Error calling AI assistant:", error);
+        throw new Error(error.message);
+      }
+
+      if (!data || (!data.response && !data.error)) {
+        throw new Error("Invalid response from AI assistant");
+      }
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
 
       // Add AI response to chat
       setMessages(prev => [...prev, { 
         role: "assistant", 
         content: data.response || "I'm sorry, I couldn't process your request." 
       }]);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error calling AI assistant:", error);
+      
+      // Add error message to chat
+      setMessages(prev => [...prev, { 
+        role: "assistant", 
+        content: "I'm sorry, I encountered an error processing your request. Please try again later." 
+      }]);
+      
       toast({
         title: "Error",
-        description: "Failed to get a response from the AI assistant. Please try again.",
+        description: `Failed to get a response from the AI assistant: ${error.message}`,
         variant: "destructive"
       });
     } finally {
@@ -110,7 +128,7 @@ const AIChat = () => {
             </div>
           </CardHeader>
           
-          <Collapsible open={!isMinimized} className="flex-1 flex flex-col">
+          <Collapsible open={!isMinimized}>
             <CollapsibleContent className="flex flex-col h-[calc(500px-120px)]">
               <CardContent className="p-3 overflow-y-auto h-full">
                 {messages.length === 0 ? (
@@ -156,7 +174,11 @@ const AIChat = () => {
                     disabled={isLoading || !message.trim()}
                     className="bg-green-600 hover:bg-green-700"
                   >
-                    <Send className="h-4 w-4" />
+                    {isLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Send className="h-4 w-4" />
+                    )}
                   </Button>
                 </form>
               </CardFooter>
