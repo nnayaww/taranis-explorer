@@ -1,7 +1,7 @@
 
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { Check, Camera, Cpu, Cloud, Database, Globe } from "lucide-react";
+import { Check, Camera, Cpu, Cloud, Database as DatabaseIcon, Globe } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
@@ -125,7 +125,7 @@ const Products = () => {
               </div>
               <div className="flex flex-col items-center">
                 <div className="bg-white p-4 rounded-full shadow mb-3">
-                  <Database className="h-8 w-8 text-green-600" />
+                  <DatabaseIcon className="h-8 w-8 text-green-600" />
                 </div>
                 <h3 className="font-medium">Big Data Analysis</h3>
               </div>
