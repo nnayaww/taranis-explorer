@@ -5,7 +5,7 @@ import { Check, Globe, Users, Award, Leaf } from "lucide-react";
 
 const About = () => {
   return (
-    <Layout>
+    <>
       <div className="bg-gradient-to-b from-green-50 to-white">
         {/* Hero section */}
         <div className="pt-16 pb-20">
@@ -13,7 +13,7 @@ const About = () => {
             <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
               <div>
                 <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
-                  About Taranis Explorer
+                  About FarmSphere
                 </h1>
                 <p className="mt-6 text-xl text-gray-500">
                   We're revolutionizing agriculture with cutting-edge AI and imagery analysis. 
@@ -93,7 +93,7 @@ const About = () => {
             <div className="text-center mb-16">
               <h2 className="text-base text-green-600 font-semibold tracking-wide uppercase">Our Team</h2>
               <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                Meet the experts behind Taranis Explorer
+                Meet the experts behind FarmSphere
               </p>
             </div>
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -148,7 +148,7 @@ const About = () => {
                 <h2 className="text-3xl font-extrabold text-gray-900">Our Story</h2>
                 <div className="mt-6 space-y-6 text-gray-600">
                   <p>
-                    Founded in 2015, Taranis Explorer began with a simple mission: to transform the way farmers monitor and manage their crops using advanced technology.
+                    Founded in 2015, FarmSphere began with a simple mission: to transform the way farmers monitor and manage their crops using advanced technology.
                   </p>
                   <p>
                     What started as a small team of agricultural experts and computer scientists has grown into a global leader in agricultural intelligence, serving thousands of farms across multiple continents.
@@ -186,7 +186,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

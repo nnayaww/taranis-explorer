@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const testimonials = [
   {
-    quote: "Implementing Taranis has completely transformed our approach to crop management. We've seen a 20% increase in yield and 30% reduction in input costs.",
+    quote: "Implementing FarmSpherehas completely transformed our approach to crop management. We've seen a 20% increase in yield and 30% reduction in input costs.",
     name: "Sarah Johnson",
     title: "Farm Owner, Heartland Farms",
     avatar: "SJ",
@@ -15,7 +15,7 @@ const testimonials = [
     avatar: "MR",
   },
   {
-    quote: "The data insights from Taranis have enabled us to make better decisions across our 50,000 acre operation. It's like having an expert in every field.",
+    quote: "The data insights from FarmSpherehave enabled us to make better decisions across our 50,000 acre operation. It's like having an expert in every field.",
     name: "David Chen",
     title: "Operations Director, Pacific Ag Enterprises",
     avatar: "DC",

@@ -227,7 +227,7 @@ const ArticleDetail = () => {
 
   if (!article) {
     return (
-      <Layout>
+      <>
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900">Article not found</h1>
@@ -239,12 +239,12 @@ const ArticleDetail = () => {
             </Link>
           </div>
         </div>
-      </Layout>
+      </>
     );
   }
 
   return (
-    <Layout>
+    <>
       <div className="bg-white">
         {/* Hero Section */}
         <div className="relative">
@@ -351,7 +351,7 @@ const ArticleDetail = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

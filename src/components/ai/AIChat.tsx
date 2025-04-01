@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +10,12 @@ import { toast } from "@/hooks/use-toast";
 interface Message {
   role: "user" | "assistant";
   content: string;
+}
+
+// Response type from the function
+interface AIResponse {
+  response?: string;
+  error?: string;
 }
 
 const AIChat = () => {
@@ -38,18 +43,23 @@ const AIChat = () => {
     setIsLoading(true);
 
     try {
-      // Call the AI assistant function
-      const { data, error } = await supabase.functions.invoke('ai-assistant', {
+      console.log("Sending message to AI assistant:", userMessage.content);
+      
+      // Call the AI assistant function with proper error handling
+      const { data, error } = await supabase.functions.invoke<AIResponse>('ai-assistant', {
         body: { message: userMessage.content }
       });
 
+      console.log("AI assistant response:", data);
+      console.log("AI assistant error:", error);
+
       if (error) {
-        console.error("Error calling AI assistant:", error);
-        throw new Error(error.message);
+        console.error("Supabase function error:", error);
+        throw new Error(error.message || "Error calling AI assistant function");
       }
 
-      if (!data || (!data.response && !data.error)) {
-        throw new Error("Invalid response from AI assistant");
+      if (!data) {
+        throw new Error("No data received from AI assistant");
       }
 
       if (data.error) {
@@ -61,26 +71,32 @@ const AIChat = () => {
         role: "assistant", 
         content: data.response || "I'm sorry, I couldn't process your request." 
       }]);
-    } catch (error: any) {
-      console.error("Error calling AI assistant:", error);
+    } catch (error: unknown) {
+      console.error("Error in AI chat:", error);
       
-      // Check for quota exceeded error
-      const errorMessage = error.message || "";
-      const isQuotaError = errorMessage.includes("quota") || errorMessage.includes("API plan");
+      let errorMessage = "I'm sorry, I encountered an error processing your request. Please try again later.";
       
-      // Add error message to chat with more specific message for quota issues
+      if (error instanceof Error) {
+        const isQuotaError = error.message.includes("quota") || 
+                            error.message.includes("API plan") || 
+                            error.message.includes("insufficient");
+        
+        if (isQuotaError) {
+          errorMessage = "I'm sorry, the AI service is currently unavailable due to usage limits. Please try again later.";
+        }
+        
+        toast({
+          title: "Error",
+          description: `Failed to get a response: ${error.message}`,
+          variant: "destructive"
+        });
+      }
+      
+      // Add error message to chat
       setMessages(prev => [...prev, { 
         role: "assistant", 
-        content: isQuotaError 
-          ? "I'm sorry, the AI service is currently unavailable due to usage limits. Please try again later."
-          : "I'm sorry, I encountered an error processing your request. Please try again later." 
+        content: errorMessage 
       }]);
-      
-      toast({
-        title: "Error",
-        description: `Failed to get a response from the AI assistant: ${error.message}`,
-        variant: "destructive"
-      });
     } finally {
       setIsLoading(false);
     }

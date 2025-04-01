@@ -30,19 +30,19 @@ const SolutionDetail = () => {
 
   if (isLoading) {
     return (
-      <Layout>
+      <>
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900">Loading...</h1>
           </div>
         </div>
-      </Layout>
+      </>
     );
   }
 
   if (error || !solution) {
     return (
-      <Layout>
+      <>
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900">Solution not found</h1>
@@ -54,12 +54,12 @@ const SolutionDetail = () => {
             </Link>
           </div>
         </div>
-      </Layout>
+      </>
     );
   }
 
   return (
-    <Layout>
+    <>
       <div className="bg-gradient-to-b from-green-50 to-white">
         {/* Hero Section */}
         <div className="relative">
@@ -148,7 +148,7 @@ const SolutionDetail = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

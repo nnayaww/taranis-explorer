@@ -8,13 +8,13 @@ import CTASection from "@/components/home/CTASection";
 
 const Index = () => {
   return (
-    <Layout>
-      <Hero />
+    <>
+    <Hero />
       <Features />
       <Solutions />
       <Testimonials />
       <CTASection />
-    </Layout>
+      </>
   );
 };
 

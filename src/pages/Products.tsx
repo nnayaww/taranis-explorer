@@ -103,7 +103,7 @@ const Products = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="pt-12 pb-24 bg-gradient-to-b from-green-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -213,7 +213,7 @@ const Products = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

@@ -1,19 +1,36 @@
+// Import from a more recent version of Deno standard library
+import { serve } from "https://deno.land/std@0.216.0/http/server.ts";
+// Import XHR for Deno compatibility
+import "https://deno.land/x/xhr@0.3.1/mod.ts";
 
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import "https://deno.land/x/xhr@0.1.0/mod.ts";
-
+// CORS headers for cross-origin requests
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-serve(async (req) => {
+// Define the OpenAI API response interface
+interface OpenAIResponse {
+  choices?: Array<{
+    message?: {
+      content: string;
+    };
+  }>;
+  error?: {
+    code: string;
+    message: string;
+  };
+}
+
+// Main server function
+serve(async (req: Request) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    // Parse the request body
     const { message } = await req.json();
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
 
@@ -21,6 +38,7 @@ serve(async (req) => {
       throw new Error("OpenAI API key is not configured");
     }
 
+    // Send request to OpenAI API
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -41,12 +59,14 @@ serve(async (req) => {
       }),
     });
 
+    const data: OpenAIResponse = await response.json();
+
+    // Handle API errors
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error('OpenAI API error:', errorData);
+      console.error('OpenAI API error:', data);
       
       // Check specifically for quota exceeded error
-      if (errorData?.error?.code === "insufficient_quota") {
+      if (data?.error?.code === "insufficient_quota") {
         return new Response(JSON.stringify({ 
           error: "The AI service is currently unavailable due to API quota limits. Please try again later or contact support to upgrade the API plan." 
         }), {
@@ -55,18 +75,17 @@ serve(async (req) => {
         });
       }
       
-      throw new Error(`OpenAI API returned ${response.status}: ${JSON.stringify(errorData)}`);
+      throw new Error(`OpenAI API returned ${response.status}: ${JSON.stringify(data.error)}`);
     }
-
-    const data = await response.json();
     
-    // Check if data and choices exist before accessing
+    // Validate response structure
     if (!data || !data.choices || !data.choices[0] || !data.choices[0].message) {
       throw new Error("Invalid response structure from OpenAI API");
     }
     
     const aiResponse = data.choices[0].message.content;
 
+    // Return successful response
     return new Response(JSON.stringify({ 
       response: aiResponse 
     }), {

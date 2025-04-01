@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Taranis Explorer</h3>
+            <h3 className="text-xl font-bold mb-4">FarmSphere</h3>
             <p className="text-gray-400 mb-4">
               Revolutionizing agriculture with AI-powered crop intelligence
             </p>
@@ -61,7 +61,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} Taranis Explorer. All rights reserved.
+            &copy; {new Date().getFullYear()} FarmSphere. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/privacy" className="text-gray-400 hover:text-white text-sm">
