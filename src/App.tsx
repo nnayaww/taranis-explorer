@@ -13,6 +13,7 @@ import Insights from "./pages/Insights";
 import ArticleDetail from "./pages/ArticleDetail";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import AILayout from "./components/layout/AILayout";
 
 // Create a new query client
 const queryClient = new QueryClient();
