@@ -64,10 +64,16 @@ const AIChat = () => {
     } catch (error: any) {
       console.error("Error calling AI assistant:", error);
       
-      // Add error message to chat
+      // Check for quota exceeded error
+      const errorMessage = error.message || "";
+      const isQuotaError = errorMessage.includes("quota") || errorMessage.includes("API plan");
+      
+      // Add error message to chat with more specific message for quota issues
       setMessages(prev => [...prev, { 
         role: "assistant", 
-        content: "I'm sorry, I encountered an error processing your request. Please try again later." 
+        content: isQuotaError 
+          ? "I'm sorry, the AI service is currently unavailable due to usage limits. Please try again later."
+          : "I'm sorry, I encountered an error processing your request. Please try again later." 
       }]);
       
       toast({

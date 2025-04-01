@@ -44,6 +44,17 @@ serve(async (req) => {
     if (!response.ok) {
       const errorData = await response.json();
       console.error('OpenAI API error:', errorData);
+      
+      // Check specifically for quota exceeded error
+      if (errorData?.error?.code === "insufficient_quota") {
+        return new Response(JSON.stringify({ 
+          error: "The AI service is currently unavailable due to API quota limits. Please try again later or contact support to upgrade the API plan." 
+        }), {
+          status: 429,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      
       throw new Error(`OpenAI API returned ${response.status}: ${JSON.stringify(errorData)}`);
     }
 
