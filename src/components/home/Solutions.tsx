@@ -4,6 +4,10 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+
+// Define the correct type for solutions
+type Solution = Database["public"]["Tables"]["solutions"]["Row"];
 
 const Solutions = () => {
   const { data: solutions, isLoading, error } = useQuery({
@@ -70,7 +74,7 @@ const Solutions = () => {
         </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {solutions?.map((solution) => (
+          {solutions?.map((solution: Solution) => (
             <div key={solution.id} className="relative overflow-hidden rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow">
               <div className="h-48 bg-gray-200">
                 <img 

@@ -5,6 +5,10 @@ import { Check, Camera, Cpu, Cloud, Database, Globe } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
+import type { Database } from "@/integrations/supabase/types";
+
+// Define the correct type for products
+type Product = Database["public"]["Tables"]["products"]["Row"];
 
 const ProductCard = ({ title, description, features, image, slug }: {
   title: string;
@@ -82,7 +86,7 @@ const Products = () => {
                 <p className="text-lg text-red-600">Error loading products. Please try again later.</p>
               </div>
             ) : (
-              products?.map((product) => (
+              products?.map((product: Product) => (
                 <ProductCard
                   key={product.id}
                   title={product.title}

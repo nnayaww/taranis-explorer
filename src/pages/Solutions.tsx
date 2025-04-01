@@ -6,6 +6,10 @@ import { ArrowRight, Sprout, Bug, BarChart3, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+
+// Define the correct type for solutions
+type Solution = Database["public"]["Tables"]["solutions"]["Row"];
 
 const SolutionCard = ({ title, description, icon: Icon, link }: { 
   title: string;
@@ -77,7 +81,7 @@ const Solutions = () => {
             </div>
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {solutions?.map((solution) => (
+              {solutions?.map((solution: Solution) => (
                 <SolutionCard
                   key={solution.id}
                   title={solution.title}

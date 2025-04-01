@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check, Download } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+
+// Define the correct type for products
+type Product = Database["public"]["Tables"]["products"]["Row"];
 
 const ProductDetail = () => {
   const { productId } = useParams<{ productId: string }>();

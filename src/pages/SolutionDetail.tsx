@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+
+// Define the correct type for solutions
+type Solution = Database["public"]["Tables"]["solutions"]["Row"];
 
 const SolutionDetail = () => {
   const { solutionId } = useParams<{ solutionId: string }>();
