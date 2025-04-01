@@ -6,6 +6,15 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 import type { Database } from "@/integrations/supabase/types";
+import { useState } from "react";
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationItem, 
+  PaginationLink, 
+  PaginationNext, 
+  PaginationPrevious 
+} from "@/components/ui/pagination";
 
 // Define the correct type for products
 type Product = Database["public"]["Tables"]["products"]["Row"];
@@ -51,6 +60,9 @@ const ProductCard = ({ title, description, features, image, slug }: {
 );
 
 const Products = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 3;
+
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
@@ -62,6 +74,33 @@ const Products = () => {
       return data;
     },
   });
+
+  // Calculate pagination values
+  const totalProducts = products?.length || 0;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+  
+  // Get current products
+  const getCurrentProducts = () => {
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    return products?.slice(startIndex, endIndex) || [];
+  };
+
+  // Handle page change
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Scroll to top when changing pages
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
+  // Generate page numbers array for pagination
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+    return pageNumbers;
+  };
 
   return (
     <Layout>
@@ -86,16 +125,57 @@ const Products = () => {
                 <p className="text-lg text-red-600">Error loading products. Please try again later.</p>
               </div>
             ) : (
-              products?.map((product: Product) => (
-                <ProductCard
-                  key={product.id}
-                  title={product.title}
-                  description={product.description}
-                  features={product.features.slice(0, 4)} // Limit to 4 features for display
-                  image={product.image_url}
-                  slug={product.slug}
-                />
-              ))
+              <>
+                {getCurrentProducts().map((product: Product) => (
+                  <ProductCard
+                    key={product.id}
+                    title={product.title}
+                    description={product.description}
+                    features={product.features.slice(0, 4)} // Limit to 4 features for display
+                    image={product.image_url}
+                    slug={product.slug}
+                  />
+                ))}
+                
+                {/* Pagination */}
+                {totalProducts > productsPerPage && (
+                  <div className="mt-12">
+                    <Pagination>
+                      <PaginationContent>
+                        {currentPage > 1 && (
+                          <PaginationItem>
+                            <PaginationPrevious 
+                              onClick={() => handlePageChange(currentPage - 1)}
+                              className="cursor-pointer"
+                            />
+                          </PaginationItem>
+                        )}
+                        
+                        {getPageNumbers().map(number => (
+                          <PaginationItem key={number}>
+                            <PaginationLink
+                              isActive={currentPage === number}
+                              onClick={() => handlePageChange(number)}
+                              className="cursor-pointer"
+                            >
+                              {number}
+                            </PaginationLink>
+                          </PaginationItem>
+                        ))}
+                        
+                        {currentPage < totalPages && (
+                          <PaginationItem>
+                            <PaginationNext 
+                              onClick={() => handlePageChange(currentPage + 1)}
+                              className="cursor-pointer"
+                            />
+                          </PaginationItem>
+                        )}
+                      </PaginationContent>
+                    </Pagination>
+                  </div>
+                )}
+              </>
             )}
           </div>
 
