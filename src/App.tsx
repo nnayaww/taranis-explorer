@@ -25,14 +25,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/solutions" element={<Solutions />} />
-          <Route path="/solutions/:solutionId" element={<SolutionDetail />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:productId" element={<ProductDetail />} />
-          <Route path="/insights" element={<Insights />} />
-          <Route path="/insights/:articleId" element={<ArticleDetail />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<AILayout><Index /></AILayout>} />
+          <Route path="/solutions" element={<AILayout><Solutions /></AILayout>} />
+          <Route path="/solutions/:solutionId" element={<AILayout><SolutionDetail /></AILayout>} />
+          <Route path="/products" element={<AILayout><Products /></AILayout>} />
+          <Route path="/products/:productId" element={<AILayout><ProductDetail /></AILayout>} />
+          <Route path="/insights" element={<AILayout><Insights /></AILayout>} />
+          <Route path="/insights/:articleId" element={<AILayout><ArticleDetail /></AILayout>} />
+          <Route path="/about" element={<AILayout><About /></AILayout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
