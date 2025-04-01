@@ -110,60 +110,58 @@ const AIChat = () => {
             </div>
           </CardHeader>
           
-          <CollapsibleContent forceMount className="grow">
-            <Collapsible open={!isMinimized}>
-              <CollapsibleContent className="flex flex-col h-[calc(500px-120px)]">
-                <CardContent className="p-3 overflow-y-auto h-full">
-                  {messages.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center h-full text-center text-gray-500 space-y-2">
-                      <MessageCircle className="h-10 w-10 text-green-600" />
-                      <p>Ask me anything about agricultural intelligence,<br />crop monitoring, or farming technology.</p>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {messages.map((msg, idx) => (
+          <Collapsible open={!isMinimized} className="flex-1 flex flex-col">
+            <CollapsibleContent className="flex flex-col h-[calc(500px-120px)]">
+              <CardContent className="p-3 overflow-y-auto h-full">
+                {messages.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center h-full text-center text-gray-500 space-y-2">
+                    <MessageCircle className="h-10 w-10 text-green-600" />
+                    <p>Ask me anything about agricultural intelligence,<br />crop monitoring, or farming technology.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {messages.map((msg, idx) => (
+                      <div
+                        key={idx}
+                        className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                      >
                         <div
-                          key={idx}
-                          className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                          className={`max-w-[80%] rounded-lg p-3 ${
+                            msg.role === "user"
+                              ? "bg-green-600 text-white"
+                              : "bg-gray-100 text-gray-800"
+                          }`}
                         >
-                          <div
-                            className={`max-w-[80%] rounded-lg p-3 ${
-                              msg.role === "user"
-                                ? "bg-green-600 text-white"
-                                : "bg-gray-100 text-gray-800"
-                            }`}
-                          >
-                            {msg.content}
-                          </div>
+                          {msg.content}
                         </div>
-                      ))}
-                      <div ref={messagesEndRef} />
-                    </div>
-                  )}
-                </CardContent>
-                
-                <CardFooter className="border-t p-3">
-                  <form onSubmit={handleSendMessage} className="flex w-full gap-2">
-                    <Input
-                      placeholder="Ask a question..."
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      disabled={isLoading}
-                      className="flex-1"
-                    />
-                    <Button 
-                      type="submit" 
-                      size="icon" 
-                      disabled={isLoading || !message.trim()}
-                      className="bg-green-600 hover:bg-green-700"
-                    >
-                      <Send className="h-4 w-4" />
-                    </Button>
-                  </form>
-                </CardFooter>
-              </CollapsibleContent>
-            </Collapsible>
-          </CollapsibleContent>
+                      </div>
+                    ))}
+                    <div ref={messagesEndRef} />
+                  </div>
+                )}
+              </CardContent>
+              
+              <CardFooter className="border-t p-3">
+                <form onSubmit={handleSendMessage} className="flex w-full gap-2">
+                  <Input
+                    placeholder="Ask a question..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    disabled={isLoading}
+                    className="flex-1"
+                  />
+                  <Button 
+                    type="submit" 
+                    size="icon" 
+                    disabled={isLoading || !message.trim()}
+                    className="bg-green-600 hover:bg-green-700"
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </form>
+              </CardFooter>
+            </CollapsibleContent>
+          </Collapsible>
         </Card>
       )}
     </div>
