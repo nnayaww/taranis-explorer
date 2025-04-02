@@ -1,3 +1,4 @@
+
 // Import from a more recent version of Deno standard library
 import { serve } from "https://deno.land/std@0.216.0/http/server.ts";
 // Import XHR for Deno compatibility
@@ -50,7 +51,7 @@ serve(async (req: Request) => {
         messages: [
           { 
             role: 'system', 
-            content: 'You are TaranisAI, an agricultural intelligence assistant specialized in helping farmers and agronomists. Your expertise includes crop monitoring, disease detection, yield prediction, and agricultural technology. Keep responses concise, practical, and focused on agricultural topics. When you don\'t know something, admit it rather than making up information. Use a friendly, professional tone.' 
+            content: 'You are FarmSphere, an agricultural intelligence assistant specialized in helping farmers and agronomists. Your expertise includes crop monitoring, disease detection, yield prediction, and agricultural technology. Keep responses concise, practical, and focused on agricultural topics. When you don\'t know something, admit it rather than making up information. Use a friendly, professional tone.' 
           },
           { role: 'user', content: message }
         ],

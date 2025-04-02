@@ -1,9 +1,8 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { MessageCircle, Send, X, Minimize2, Maximize2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
@@ -13,7 +12,6 @@ interface Message {
   content: string;
 }
 
-// Response type from the function
 interface AIResponse {
   response?: string;
   error?: string;
@@ -27,9 +25,7 @@ const AIChat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Initialize Chatbase script on component mount
   useEffect(() => {
-    // Add the Chatbase script
     const loadChatbase = () => {
       if (!document.getElementById("x5BiAxhbWsaR4cddUFPut")) {
         const script = document.createElement("script");
@@ -40,9 +36,7 @@ const AIChat = () => {
       }
     };
 
-    // Initialize Chatbase
     if (!window.chatbase || window.chatbase("getState") !== "initialized") {
-      // Create a proxy for the chatbase function
       window.chatbase = (...args: any[]) => {
         if (!window.chatbase.q) {
           window.chatbase.q = [];
@@ -50,13 +44,11 @@ const AIChat = () => {
         window.chatbase.q.push(args);
       };
       
-      // Add proxy handler
       window.chatbase = new Proxy(window.chatbase, {
         get(target, prop) {
           if (prop === "q") {
             return target.q;
           }
-          // Check if prop is a string to fix TypeScript error
           if (typeof prop === 'string') {
             return (...args: any[]) => target(prop, ...args);
           }
@@ -64,7 +56,6 @@ const AIChat = () => {
         }
       });
       
-      // Load the script
       if (document.readyState === "complete") {
         loadChatbase();
       } else {
@@ -77,7 +68,6 @@ const AIChat = () => {
     };
   }, []);
 
-  // Scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -87,7 +77,6 @@ const AIChat = () => {
     
     if (!message.trim()) return;
     
-    // Add user message to chat
     const userMessage = { role: "user" as const, content: message.trim() };
     setMessages(prev => [...prev, userMessage]);
     setMessage("");
@@ -96,7 +85,6 @@ const AIChat = () => {
     try {
       console.log("Sending message to AI assistant:", userMessage.content);
       
-      // Call the AI assistant function with proper error handling
       const { data, error } = await supabase.functions.invoke<AIResponse>('ai-assistant', {
         body: { message: userMessage.content }
       });
@@ -117,7 +105,6 @@ const AIChat = () => {
         throw new Error(data.error);
       }
 
-      // Add AI response to chat
       setMessages(prev => [...prev, { 
         role: "assistant", 
         content: data.response || "I'm sorry, I couldn't process your request." 
@@ -143,7 +130,6 @@ const AIChat = () => {
         });
       }
       
-      // Add error message to chat
       setMessages(prev => [...prev, { 
         role: "assistant", 
         content: errorMessage 
@@ -180,7 +166,7 @@ const AIChat = () => {
       ) : (
         <Card className={`w-80 sm:w-96 shadow-xl transition-all duration-300 ${isMinimized ? 'h-16' : 'h-[500px]'}`}>
           <CardHeader className="p-3 border-b flex flex-row items-center justify-between space-y-0">
-            <CardTitle className="text-base font-medium">AI Agricultural Assistant</CardTitle>
+            <CardTitle className="text-base font-medium">FarmSphere Assistant</CardTitle>
             <div className="flex gap-1">
               <Button 
                 variant="ghost" 
