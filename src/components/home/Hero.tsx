@@ -23,7 +23,7 @@ const Hero = () => {
           <Button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 text-base font-medium shadow-lg">
             Get Started
           </Button>
-          <Button variant="outline" className="border-white text-white hover:bg-white hover:text-green-900 px-8 py-3 text-base font-medium">
+          <Button className="border-white bg-transparent text-white hover:bg-white hover:text-green-900 px-8 py-3 text-base font-medium border">
             Watch Demo
           </Button>
         </div>

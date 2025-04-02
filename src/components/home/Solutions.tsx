@@ -23,6 +23,18 @@ const Solutions = () => {
     },
   });
 
+  // Custom image mapping based on solution titles
+  const getImageForSolution = (title: string) => {
+    if (title.includes("Crop Monitoring") || title.includes("crop") || title.includes("monitoring")) {
+      return "https://images.unsplash.com/photo-1485833077593-4278bba3f11f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80";
+    } else if (title.includes("Disease") || title.includes("Pest") || title.includes("detection")) {
+      return "https://images.unsplash.com/photo-1498936178812-4b2e558d2937?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80";
+    } else if (title.includes("Yield") || title.includes("Prediction") || title.includes("Analytics")) {
+      return "https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80";
+    }
+    return solution?.image_url; // Fallback to the solution's image_url if available
+  };
+
   if (isLoading) {
     return (
       <div className="bg-gray-50 py-16 sm:py-24">
@@ -78,7 +90,7 @@ const Solutions = () => {
             <div key={solution.id} className="relative overflow-hidden rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow">
               <div className="h-48 bg-gray-200">
                 <img 
-                  src={solution.image_url} 
+                  src={getImageForSolution(solution.title)} 
                   alt={solution.title} 
                   className="w-full h-full object-cover"
                 />

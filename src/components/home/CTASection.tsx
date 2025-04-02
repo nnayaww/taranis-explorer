@@ -13,7 +13,7 @@ const CTASection = () => {
           <Button className="bg-white text-green-700 hover:bg-green-50 px-6 py-3 text-base font-medium shadow-lg">
             Get Started
           </Button>
-          <Button variant="outline" className="border-white text-white hover:bg-white hover:text-green-700 px-6 py-3 text-base font-medium">
+          <Button className="border-white bg-transparent text-white hover:bg-white hover:text-green-700 px-6 py-3 text-base font-medium border">
             Learn More
           </Button>
         </div>
