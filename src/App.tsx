@@ -14,6 +14,7 @@ import ArticleDetail from "./pages/ArticleDetail";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import AILayout from "./components/layout/AILayout";
+import Layout from "./components/layout/Layout";
 
 // Create a new query client
 const queryClient = new QueryClient();
@@ -25,14 +26,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AILayout><Index /></AILayout>} />
-          <Route path="/solutions" element={<AILayout><Solutions /></AILayout>} />
-          <Route path="/solutions/:solutionId" element={<AILayout><SolutionDetail /></AILayout>} />
-          <Route path="/products" element={<AILayout><Products /></AILayout>} />
-          <Route path="/products/:productId" element={<AILayout><ProductDetail /></AILayout>} />
-          <Route path="/insights" element={<AILayout><Insights /></AILayout>} />
-          <Route path="/insights/:articleId" element={<AILayout><ArticleDetail /></AILayout>} />
-          <Route path="/about" element={<AILayout><About /></AILayout>} />
+          <Route path="/" element={<Layout><AILayout><Index /></AILayout></Layout>} />
+          <Route path="/solutions" element={<Layout><AILayout><Solutions /></AILayout></Layout>} />
+          <Route path="/solutions/:solutionId" element={<Layout><AILayout><SolutionDetail /></AILayout></Layout>} />
+          <Route path="/products" element={<Layout><AILayout><Products /></AILayout></Layout>} />
+          <Route path="/products/:productId" element={<Layout><AILayout><ProductDetail /></AILayout></Layout>} />
+          <Route path="/insights" element={<Layout><AILayout><Insights /></AILayout></Layout>} />
+          <Route path="/insights/:articleId" element={<Layout><AILayout><ArticleDetail /></AILayout></Layout>} />
+          <Route path="/about" element={<Layout><AILayout><About /></AILayout></Layout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
