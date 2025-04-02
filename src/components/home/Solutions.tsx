@@ -32,7 +32,8 @@ const Solutions = () => {
     } else if (title.includes("Yield") || title.includes("Prediction") || title.includes("Analytics")) {
       return "https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80";
     }
-    return solution?.image_url; // Fallback to the solution's image_url if available
+    // Fixed: Changed 'solution?.image_url' to a default image URL
+    return "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80";
   };
 
   if (isLoading) {
