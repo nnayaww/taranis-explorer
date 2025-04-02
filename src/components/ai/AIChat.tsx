@@ -26,6 +26,52 @@ const AIChat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Initialize Chatbase script on component mount
+  useEffect(() => {
+    // Add the Chatbase script
+    const loadChatbase = () => {
+      if (!document.getElementById("x5BiAxhbWsaR4cddUFPut")) {
+        const script = document.createElement("script");
+        script.src = "https://www.chatbase.co/embed.min.js";
+        script.id = "x5BiAxhbWsaR4cddUFPut";
+        script.setAttribute("domain", "www.chatbase.co");
+        document.body.appendChild(script);
+      }
+    };
+
+    // Initialize Chatbase
+    if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+      // Create a proxy for the chatbase function
+      window.chatbase = (...arguments: any[]) => {
+        if (!window.chatbase.q) {
+          window.chatbase.q = [];
+        }
+        window.chatbase.q.push(arguments);
+      };
+      
+      // Add proxy handler
+      window.chatbase = new Proxy(window.chatbase, {
+        get(target, prop) {
+          if (prop === "q") {
+            return target.q;
+          }
+          return (...args: any[]) => target(prop, ...args);
+        }
+      });
+      
+      // Load the script
+      if (document.readyState === "complete") {
+        loadChatbase();
+      } else {
+        window.addEventListener("load", loadChatbase);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("load", loadChatbase);
+    };
+  }, []);
+
   // Scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
