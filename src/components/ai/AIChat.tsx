@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -42,11 +43,11 @@ const AIChat = () => {
     // Initialize Chatbase
     if (!window.chatbase || window.chatbase("getState") !== "initialized") {
       // Create a proxy for the chatbase function
-      window.chatbase = (...arguments: any[]) => {
+      window.chatbase = (...args: any[]) => {
         if (!window.chatbase.q) {
           window.chatbase.q = [];
         }
-        window.chatbase.q.push(arguments);
+        window.chatbase.q.push(args);
       };
       
       // Add proxy handler
@@ -55,7 +56,11 @@ const AIChat = () => {
           if (prop === "q") {
             return target.q;
           }
-          return (...args: any[]) => target(prop, ...args);
+          // Check if prop is a string to fix TypeScript error
+          if (typeof prop === 'string') {
+            return (...args: any[]) => target(prop, ...args);
+          }
+          return undefined;
         }
       });
       
