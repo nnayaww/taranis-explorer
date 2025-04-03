@@ -6,25 +6,25 @@ const features = [
     name: "Crop Monitoring",
     description: "Identify emerging issues early with high-resolution imagery and AI-powered analysis across your entire operation.",
     icon: Leaf,
-    image: "/lovable-uploads/photo-1518495973542-4542c06a5843.png"  // Crop monitoring image
+    image: "/lovable-uploads/photo-1518495973542-4542c06a5843.png"  // Crop monitoring image (6th in your list)
   },
   {
     name: "Disease Detection",
     description: "Automatically detect and identify diseases, pests, and weeds with advanced computer vision technology.",
     icon: Sprout,
-    image: "/lovable-uploads/photo-1509316975850-ff9c5deb0cd9.png"  // Pest and disease detection image
+    image: "/lovable-uploads/photo-1509316975850-ff9c5deb0cd9.png"  // Disease detection image (5th in your list)
   },
   {
     name: "Weather Intelligence",
     description: "Make informed decisions with hyperlocal weather forecasts and growing degree day calculations.",
     icon: CloudRain,
-    image: "/lovable-uploads/photo-1482938289607-e9573fc25ebb.png"  // Weather intelligence image
+    image: "/lovable-uploads/photo-1482938289607-e9573fc25ebb.png"  // Weather intelligence image (4th in your list)
   },
   {
     name: "Yield Analytics",
     description: "Predict yields and optimize inputs with historical data analysis and machine learning algorithms.",
     icon: BarChart3,
-    image: "/lovable-uploads/photo-1469474968028-56623f02e42e.png"  // Yield analytics image
+    image: "/lovable-uploads/photo-1469474968028-56623f02e42e.png"  // Yield analytics image (3rd in your list)
   },
 ];
 
