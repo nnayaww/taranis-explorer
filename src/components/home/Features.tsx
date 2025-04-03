@@ -6,25 +6,25 @@ const features = [
     name: "Crop Monitoring",
     description: "Identify emerging issues early with high-resolution imagery and AI-powered analysis across your entire operation.",
     icon: Leaf,
-    image: "/lovable-uploads/photo-1518495973542-4542c06a5843.png"  // Crop monitoring image (6th in your list)
+    image: "/lovable-uploads/photo-1518495973542-4542c06a5843.png"
   },
   {
     name: "Disease Detection",
     description: "Automatically detect and identify diseases, pests, and weeds with advanced computer vision technology.",
     icon: Sprout,
-    image: "/lovable-uploads/photo-1509316975850-ff9c5deb0cd9.png"  // Disease detection image (5th in your list)
+    image: "/lovable-uploads/photo-1509316975850-ff9c5deb0cd9.png"
   },
   {
     name: "Weather Intelligence",
     description: "Make informed decisions with hyperlocal weather forecasts and growing degree day calculations.",
     icon: CloudRain,
-    image: "/lovable-uploads/photo-1482938289607-e9573fc25ebb.png"  // Weather intelligence image (4th in your list)
+    image: "/lovable-uploads/photo-1482938289607-e9573fc25ebb.png"
   },
   {
     name: "Yield Analytics",
     description: "Predict yields and optimize inputs with historical data analysis and machine learning algorithms.",
     icon: BarChart3,
-    image: "/lovable-uploads/photo-1469474968028-56623f02e42e.png"  // Yield analytics image (3rd in your list)
+    image: "/lovable-uploads/photo-1469474968028-56623f02e42e.png"
   },
 ];
 
@@ -52,6 +52,7 @@ const Features = () => {
                     src={feature.image} 
                     alt={feature.name} 
                     className="w-full h-full object-cover"
+                    key={feature.image} // Add a key to force re-render when image changes
                   />
                 </div>
                 
@@ -93,12 +94,14 @@ const Features = () => {
                   src="/lovable-uploads/photo-1513836279014-a89f7a76ae86.png" 
                   alt="Agricultural technology" 
                   className="rounded-lg shadow-xl"
+                  key="tech-image" // Add key to force re-render
                 />
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-lg p-4 shadow-md border border-gray-100">
                   <img 
                     src="/lovable-uploads/photo-1465146344425-f00d5f5c8f07.png" 
                     alt="Farming quote" 
                     className="w-64 h-auto"
+                    key="quote-image" // Add key to force re-render
                   />
                 </div>
               </div>
