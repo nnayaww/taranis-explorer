@@ -1,6 +1,5 @@
 
 import { useEffect } from "react";
-import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sprout, Bug, BarChart3, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -37,6 +36,12 @@ const getIconForSolution = (title: string) => {
   if (title.includes("Enterprise") || title.includes("Agronomists")) return Building2;
   return Sprout;
 };
+
+const fallbackSolutions = [
+  { id: "1", title: "Crop Monitoring", description: "Real-time monitoring of crop health using satellite and drone imagery.", slug: "crop-monitoring" },
+  { id: "2", title: "Disease Detection", description: "AI-powered early detection of crop diseases and pest infestations.", slug: "disease-detection" },
+  { id: "3", title: "Yield Prediction", description: "Data-driven yield forecasting to optimize harvest planning.", slug: "yield-prediction" },
+];
 
 const Solutions = () => {
   const { data: solutions, isLoading, error } = useQuery({
@@ -81,7 +86,7 @@ const Solutions = () => {
             </div>
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {solutions?.map((solution: Solution) => (
+              {(solutions && solutions.length > 0 ? solutions : fallbackSolutions).map((solution) => (
                 <SolutionCard
                   key={solution.id}
                   title={solution.title}

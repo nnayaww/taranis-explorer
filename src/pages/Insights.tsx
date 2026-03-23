@@ -1,5 +1,4 @@
 
-import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, User, Clock, Tag } from "lucide-react";
 import { Link } from "react-router-dom";

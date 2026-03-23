@@ -1,6 +1,5 @@
 
 import { useParams, Link } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check, Download } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
