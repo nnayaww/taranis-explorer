@@ -13,6 +13,7 @@ import Insights from "./pages/Insights";
 import ArticleDetail from "./pages/ArticleDetail";
 import About from "./pages/About";
 import CropAnalysis from "./pages/CropAnalysis";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import AILayout from "./components/layout/AILayout";
 import Layout from "./components/layout/Layout";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/insights/:articleId" element={<Layout><AILayout><ArticleDetail /></AILayout></Layout>} />
           <Route path="/about" element={<Layout><AILayout><About /></AILayout></Layout>} />
           <Route path="/crop-analysis" element={<Layout><AILayout><CropAnalysis /></AILayout></Layout>} />
+          <Route path="/dashboard" element={<Layout><AILayout><Dashboard /></AILayout></Layout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

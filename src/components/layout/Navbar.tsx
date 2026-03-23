@@ -38,6 +38,9 @@ const Navbar = () => {
             <Link to="/crop-analysis" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
               AI Analysis
             </Link>
+            <Link to="/dashboard" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
+              Dashboard
+            </Link>
             <Button variant="outline" className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
               Request Demo
             </Button>
@@ -73,6 +76,9 @@ const Navbar = () => {
             </Link>
             <Link to="/crop-analysis" className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors font-medium">
               AI Analysis
+            </Link>
+            <Link to="/dashboard" className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors font-medium">
+              Dashboard
             </Link>
             <div className="px-3 py-2">
               <Button variant="outline" className="w-full border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
