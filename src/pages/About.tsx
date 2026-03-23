@@ -98,36 +98,34 @@ const About = () => {
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 {
-                  name: "Dr. Emily Chen",
+                  name: "Shadrack Acheampong",
                   role: "Chief Executive Officer",
-                  image: "https://randomuser.me/api/portraits/women/23.jpg",
+                  initials: "SA",
                   bio: "PhD in Agricultural Science with 15+ years of experience in crop management."
                 },
                 {
-                  name: "Michael Johnson",
+                  name: "Joshua Kissi",
                   role: "Chief Technology Officer",
-                  image: "https://randomuser.me/api/portraits/men/32.jpg",
+                  initials: "JK",
                   bio: "Expert in AI and computer vision with a background in agricultural engineering."
                 },
                 {
-                  name: "Sarah Williams",
+                  name: "Wisdom Oti Boakye",
                   role: "Lead Data Scientist",
-                  image: "https://randomuser.me/api/portraits/women/44.jpg",
+                  initials: "WB",
                   bio: "Specialized in machine learning applications for agricultural data analysis."
                 },
                 {
-                  name: "David Rodriguez",
+                  name: "Benjamin Laweh",
                   role: "Head of Product",
-                  image: "https://randomuser.me/api/portraits/men/68.jpg",
+                  initials: "BL",
                   bio: "Former agronomist with expertise in translating field needs to technology solutions."
                 }
               ].map((member, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-64 object-cover object-center"
-                  />
+                  <div className="w-full h-48 bg-green-100 flex items-center justify-center">
+                    <span className="text-4xl font-bold text-green-600">{member.initials}</span>
+                  </div>
                   <div className="p-6">
                     <h3 className="text-lg font-bold">{member.name}</h3>
                     <p className="text-green-600 mb-2">{member.role}</p>
@@ -147,24 +145,24 @@ const About = () => {
                 <h2 className="text-3xl font-extrabold text-gray-900">Our Story</h2>
                 <div className="mt-6 space-y-6 text-gray-600">
                   <p>
-                    Founded in 2015, FarmSphere began with a simple mission: to transform the way farmers monitor and manage their crops using advanced technology.
+                    Founded in 2025 at the Kwame Nkrumah University of Science and Technology (KNUST), FarmSphere was born out of a vision to transform Ghanaian and African agriculture through cutting-edge AI and data-driven technology.
                   </p>
                   <p>
-                    What started as a small team of agricultural experts and computer scientists has grown into a global leader in agricultural intelligence, serving thousands of farms across multiple continents.
+                    What started as a university research project has quickly grown into a promising agricultural intelligence platform, built by a passionate team of engineers, agronomists, and data scientists committed to solving real farming challenges.
                   </p>
                   <p>
-                    Today, we're proud to be at the forefront of the agricultural technology revolution, continuously innovating to meet the evolving needs of modern farming.
+                    Today, we're proud to be building the future of smart farming from Ghana, with a mission to empower farmers across Africa with the tools they need to thrive.
                   </p>
                 </div>
                 <div className="mt-6">
                   <h3 className="text-lg font-semibold mb-3">Key Milestones:</h3>
                   <ul className="space-y-2">
                     {[
-                      "2015: Founded in Silicon Valley",
-                      "2017: Launched first commercial product",
-                      "2019: Expanded operations to Europe and South America",
-                      "2021: Reached 1 million acres monitored",
-                      "2023: Introduced AI-driven yield prediction technology"
+                      "2025: Founded at KNUST, Kumasi, Ghana",
+                      "2025: Launched AI-powered crop analysis platform",
+                      "2025: Onboarded first cohort of partner farmers",
+                      "2026: Integrated Supabase and Gemini AI for real-time intelligence",
+                      "2026: Expanding reach across West Africa"
                     ].map((milestone, index) => (
                       <li key={index} className="flex items-start">
                         <Check className="text-green-500 h-5 w-5 mr-2 mt-0.5" />

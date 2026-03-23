@@ -7,7 +7,7 @@ const articles = [
   {
     title: "The Future of Precision Agriculture in 2023",
     excerpt: "How emerging technologies are revolutionizing the way farmers monitor and manage their crops.",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80",
+    image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1332&q=80",
     date: "June 15, 2023",
     author: "Dr. Maria Rodriguez",
     readTime: "8 min read",
@@ -17,7 +17,7 @@ const articles = [
   {
     title: "Early Disease Detection: A Game Changer for Crop Management",
     excerpt: "How early detection of plant diseases can drastically reduce crop losses and improve agricultural sustainability.",
-    image: "https://images.unsplash.com/photo-1628352081568-6a763b86ea71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=1170&q=80",
     date: "May 22, 2023",
     author: "James Thompson",
     readTime: "6 min read",
@@ -27,7 +27,7 @@ const articles = [
   {
     title: "Maximizing Yield Through Data-Driven Decision Making",
     excerpt: "Case studies showing how farmers increased their yields by 30% through systematic application of agricultural intelligence.",
-    image: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+    image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1074&q=80",
     date: "April 10, 2023",
     author: "Emma Chen, PhD",
     readTime: "12 min read",
@@ -37,7 +37,7 @@ const articles = [
   {
     title: "The ROI of Agricultural Intelligence Platforms",
     excerpt: "Breaking down the financial benefits of implementing agricultural intelligence solutions on farms of various sizes.",
-    image: "https://images.unsplash.com/photo-1536657464919-892534f38d56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+    image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=1074&q=80",
     date: "March 5, 2023",
     author: "Robert Johnson",
     readTime: "9 min read",
@@ -47,7 +47,7 @@ const articles = [
   {
     title: "Climate Change and the Future of Farming",
     excerpt: "How agricultural intelligence tools are helping farmers adapt to changing climate conditions and unpredictable weather patterns.",
-    image: "https://images.unsplash.com/photo-1439792675105-701e6a4ab6f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80",
+    image: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1173&q=80",
     date: "February 18, 2023",
     author: "Dr. Sarah Williams",
     readTime: "10 min read",
@@ -57,7 +57,7 @@ const articles = [
   {
     title: "Sustainable Agriculture: The Role of Technology",
     excerpt: "Exploring how modern technology is enabling more sustainable farming practices without sacrificing productivity.",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1332&q=80",
     date: "January 7, 2023",
     author: "Thomas Lee",
     readTime: "7 min read",
